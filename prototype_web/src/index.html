@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JackStar File Admin</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-card">
+          <div class="brand-chip">JS</div>
+          <div>
+            <p class="eyebrow">JackStar Archive</p>
+            <h1>File Admin</h1>
+          </div>
+        </div>
+
+        <section class="sidebar-section">
+          <p class="section-title">Acceso Rapido</p>
+          <div id="quickAccess" class="nav-list"></div>
+        </section>
+
+        <section class="sidebar-section">
+          <p class="section-title">Unidades</p>
+          <div id="drivesList" class="nav-list"></div>
+        </section>
+
+        <section class="sidebar-section sidebar-footer">
+          <button id="pickFolderBtn" class="ghost-button">Elegir carpeta</button>
+        </section>
+      </aside>
+
+      <main class="main-view">
+        <header class="hero">
+          <div>
+            <p class="hero-tag">Explorador de archivos completo</p>
+            <h2>Morado, dorado y hecho para JackStar</h2>
+            <p class="hero-copy">
+              Administra el PC completo desde una interfaz viva, amplia y ordenada.
+            </p>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span>Ruta actual</span>
+              <strong id="currentPathLabel">Cargando...</strong>
+            </div>
+            <div class="stat-card">
+              <span>Elementos visibles</span>
+              <strong id="itemCountLabel">0</strong>
+            </div>
+          </div>
+        </header>
+
+        <section class="toolbar">
+          <div class="toolbar-left">
+            <button id="backBtn" class="toolbar-button">Subir</button>
+            <button id="refreshBtn" class="toolbar-button">Refrescar</button>
+          </div>
+          <div class="toolbar-center">
+            <input id="pathInput" class="path-input" type="text" spellcheck="false" />
+          </div>
+          <div class="toolbar-right">
+            <input id="searchInput" class="search-input" type="search" placeholder="Filtrar por nombre..." />
+          </div>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel files-panel">
+            <div class="panel-header">
+              <span>Navegacion</span>
+              <span id="statusText">Listando...</span>
+            </div>
+            <div class="table-head">
+              <span>Nombre</span>
+              <span>Tipo</span>
+              <span>Tamano</span>
+              <span>Modificado</span>
+            </div>
+            <div id="fileList" class="file-list"></div>
+          </div>
+
+          <div class="panel details-panel">
+            <div class="panel-header">
+              <span>Detalle</span>
+              <span>Acciones</span>
+            </div>
+            <div id="detailCard" class="detail-card">
+              <p class="detail-empty">Selecciona un archivo o carpeta para ver detalle.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./renderer.js"></script>
+  </body>
+  </html>

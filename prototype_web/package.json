@@ -1,0 +1,16 @@
+{
+  "name": "jackstar-file-admin",
+  "version": "0.1.0",
+  "description": "Administrador de archivos JackStar para Windows",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "author": "JackStar",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.21.2",
+    "open": "^10.1.2"
+  }
+}
