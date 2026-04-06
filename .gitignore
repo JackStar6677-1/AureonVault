@@ -1,8 +1,19 @@
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
 prototype_web/node_modules/
+prototype_web/dist/
+prototype_web/build/
 
 .env
+.env.*
 .venv/
 venv/
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+*.log
