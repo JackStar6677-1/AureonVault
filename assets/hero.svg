@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#150833"/>
+      <stop offset="60%" stop-color="#080314"/>
+      <stop offset="100%" stop-color="#030109"/>
+    </radialGradient>
+    
+    <!-- Gold Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+    
+    <!-- Purple Gradient -->
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+
+    <!-- Scanner Laser Gradient -->
+    <linearGradient id="laserGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#eab308" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#eab308" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#eab308" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes scanMove {
+      0%, 100% { transform: translateY(-50px); opacity: 0.3; }
+      50% { transform: translateY(50px); opacity: 1; }
+    }
+    @keyframes rotateLock {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes pulseAura {
+      0%, 100% { opacity: 0.4; transform: scale(0.95); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    .laser-line {
+      animation: scanMove 4s infinite ease-in-out;
+    }
+    .rotating-lock {
+      animation: rotateLock 12s infinite linear;
+      transform-origin: 620px 150px;
+    }
+    .vault-glow {
+      animation: pulseAura 3s infinite ease-in-out;
+      transform-origin: 620px 150px;
+    }
+    .star {
+      animation: blink 3s infinite ease-in-out;
+    }
+  </style>
+
+  <!-- Background -->
+  <rect width="800" height="300" fill="url(#bgGrad)"/>
+
+  <!-- Background Nodes / Data Stars -->
+  <g fill="#ffffff" fill-opacity="0.3">
+    <circle cx="100" cy="50" r="1.5" class="star" style="animation-delay: 0.5s;"/>
+    <circle cx="280" cy="70" r="2.5" class="star" style="animation-delay: 1.2s;" fill="#fef08a"/>
+    <circle cx="340" cy="220" r="1" class="star" style="animation-delay: 2.1s;"/>
+    <circle cx="150" cy="180" r="2" class="star" style="animation-delay: 0s;" fill="#c084fc"/>
+    <circle cx="480" cy="50" r="1.5" class="star" style="animation-delay: 3s;"/>
+    <circle cx="450" cy="240" r="2" class="star" style="animation-delay: 1.8s;"/>
+  </g>
+
+  <!-- Vault Aura -->
+  <ellipse cx="620" cy="150" rx="70" ry="70" fill="url(#purpleGrad)" opacity="0.3" class="vault-glow" filter="url(#glow)"/>
+
+  <!-- Vault Coffer Geometry -->
+  <g transform="translate(560, 90)">
+    <!-- Base Shell -->
+    <rect x="0" y="0" width="120" height="120" rx="15" fill="#150833" stroke="url(#purpleGrad)" stroke-width="3" filter="url(#glow)"/>
+    <!-- Inner Metallic Plate -->
+    <rect x="12" y="12" width="96" height="96" rx="8" fill="#0d0421" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  </g>
+
+  <!-- Rotating Vault Dial / Combination Lock -->
+  <g class="rotating-lock">
+    <!-- Outer combination track -->
+    <circle cx="620" cy="150" r="32" fill="none" stroke="url(#purpleGrad)" stroke-width="2.5" stroke-dasharray="6, 8"/>
+    <!-- Mid Dial -->
+    <circle cx="620" cy="150" r="22" fill="#150833" stroke="url(#goldGrad)" stroke-width="2"/>
+    <!-- Dial notches -->
+    <line x1="620" y1="128" x2="620" y2="134" stroke="url(#goldGrad)" stroke-width="2"/>
+    <line x1="620" y1="166" x2="620" y2="172" stroke="url(#goldGrad)" stroke-width="2"/>
+    <line x1="598" y1="150" x2="604" y2="150" stroke="url(#goldGrad)" stroke-width="2"/>
+    <line x1="636" y1="150" x2="642" y2="150" stroke="url(#goldGrad)" stroke-width="2"/>
+    <!-- Center keyhole / indicator -->
+    <circle cx="620" cy="150" r="8" fill="url(#goldGrad)"/>
+    <circle cx="620" cy="150" r="4" fill="#030109"/>
+  </g>
+
+  <!-- Moving Laser Scanner -->
+  <g class="laser-line">
+    <rect x="550" y="150" width="140" height="4" fill="url(#laserGrad)" filter="url(#glow)"/>
+    <line x1="545" y1="152" x2="695" y2="152" stroke="#eab308" stroke-width="1.5" filter="url(#glow)"/>
+  </g>
+
+  <!-- Typography / Brand Titles -->
+  <g transform="translate(60, 90)">
+    <text x="0" y="0" font-family="'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#c084fc" letter-spacing="4" opacity="0.9">
+      SECURE LOCAL ARCHIVE MANAGER
+    </text>
+    <text x="-2" y="45" font-family="'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="800" fill="url(#goldGrad)" letter-spacing="1" filter="url(#glow)">
+      AureonVault
+    </text>
+    <text x="0" y="75" font-family="'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="300" fill="#ffffff" opacity="0.8" letter-spacing="0.5">
+      Explorador de Archivos Experimental con UI Nativa y Web
+    </text>
+  </g>
+
+  <!-- Status / Integrity Indicator -->
+  <g transform="translate(60, 240)">
+    <circle cx="10" cy="10" r="5" fill="#eab308" filter="url(#glow)" class="star"/>
+    <text x="25" y="14" font-family="monospace" font-size="12" fill="#eab308" font-weight="bold" letter-spacing="1">
+      INTEGRITY: SECURE (TKINTER ENGINE &amp; LOCAL EXPRESS PROTO)
+    </text>
+  </g>
+</svg>

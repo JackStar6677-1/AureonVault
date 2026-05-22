@@ -1,62 +1,81 @@
-# AureonVault
+# AureonVault — Explorador de Archivos Experimental
 
-AureonVault es un explorador de archivos experimental para Windows con una interfaz de escritorio propia en Python/Tkinter y un prototipo web conservado dentro del mismo repositorio.
+<p align="center">
+  <img src="assets/hero.svg" alt="AureonVault Hero Banner" width="800">
+</p>
 
-La idea del proyecto no es competir con el Explorador de Windows como reemplazo total, sino probar una interfaz con identidad visual marcada, navegación rápida, panel de detalle, filtro inmediato y herramientas de conveniencia para recorrer carpetas del equipo desde una app más controlada.
+**AureonVault** es un explorador de archivos experimental diseñado para el entorno de Windows, que cuenta con una interfaz de escritorio nativa en Python/Tkinter y conserva un prototipo de interfaz web local dentro del mismo repositorio.
 
-## Que contiene este repositorio
+El objetivo del proyecto no es reemplazar el Explorador de Windows nativo, sino experimentar con una dirección visual fuertemente estilizada (tonos oscuros, morados y dorados), controles simplificados de navegación, filtros de búsqueda instantáneos y herramientas integradas para terminales del sistema.
 
-Este repo guarda dos aproximaciones del mismo experimento:
+---
 
-- una aplicacion de escritorio nativa escrita en Python y Tkinter
-- un MVP web local dentro de `prototype_web/`, mantenido como referencia del camino anterior
+## 🏗️ Arquitectura Híbrida del Sistema
 
-La app principal actual es la version de escritorio.
+AureonVault integra dos aproximaciones del mismo problema: una aplicación de escritorio de alto rendimiento basada en Python y un prototipo web desacoplado basado en Node.js y Express.
 
-## Objetivo del proyecto
+El siguiente diagrama detalla cómo se organizan y comunican ambos entornos con el sistema de archivos de Windows:
 
-El objetivo de AureonVault es explorar una experiencia de administracion de archivos con estas prioridades:
+```mermaid
+graph TD
+    classDef default fill:#0f0728,stroke:#a855f7,stroke-width:2px,color:#fff;
+    classDef gold fill:#1e1405,stroke:#d4af37,stroke-width:2px,color:#ffeaa7;
 
-- interfaz claramente personalizada y no genica
-- acceso rapido a ubicaciones comunes de Windows
-- lectura comoda del contenido de carpetas
-- vista de detalle para el elemento seleccionado
-- acciones utiles sin salir de la app
-- un entorno visual pensado para sesiones largas en escritorio
+    subgraph DesktopApp [Aplicación de Escritorio Python]
+        App[app.py: Core Application]
+        TkinterUI[Interfaz Tkinter: Vista de Archivos, Sidebar, Filtros]
+        SysCalls[Módulo OS / Subprocess: OS System Drives, File Operations]
+        IntegrTerminal[Terminal Integrada: cmd.exe / powershell.exe]
+    end
 
-## Funciones principales
+    subgraph WebPrototype [Prototipo Web Local]
+        Server[server.js: Servidor Express Node.js]
+        WebUI[index.html / styles.css / renderer.js]
+    end
 
-La aplicacion Python incluye:
+    WinSys[API de Sistema de Archivos Windows]
 
-- deteccion de unidades disponibles del sistema
-- barra lateral con accesos rapidos a carpetas frecuentes
-- breadcrumbs para navegar por la ruta actual
-- listado ordenado de carpetas y archivos
-- filtro por nombre en tiempo real
-- panel de detalle del elemento seleccionado
-- vista previa de archivos de texto cuando aplica
-- apertura del archivo o carpeta seleccionada
-- opcion de revelar el elemento en el Explorador de Windows
-- terminal integrada para lanzar comandos desde la carpeta actual
-- acceso para abrir una terminal administrativa en la ubicacion activa
+    App --> TkinterUI
+    App --> SysCalls
+    App --> IntegrTerminal
+    SysCalls --> WinSys
+    IntegrTerminal --> WinSys
 
-## Stack
+    Server --> WebUI
+    Server --> WinSys
 
-- Python
-- Tkinter para la interfaz principal
-- APIs del sistema de archivos de Windows
-- Node.js + Express en el prototipo web
+    class App,Server,WinSys gold;
+```
 
-## Estructura del repositorio
+---
+
+## ✨ Características Principales
+
+### 🐍 Aplicación de Escritorio (Nativa Python)
+*   **Detección Automática de Discos:** Escaneo dinámico y listado de unidades del sistema (C:, D:, etc.) al iniciar.
+*   **Barra Lateral de Accesos Rápidos:** Enlaces directos a directorios frecuentes (`Escritorio`, `Documentos`, `Descargas`, `Imágenes`).
+*   **Navegación Breadcrumbs:** Barra de migas de pan interactiva que permite subir de nivel jerárquico fácilmente.
+*   **Filtro Dinámico:** Búsqueda y filtrado en tiempo real de archivos y carpetas mediante una barra de búsqueda rápida.
+*   **Panel de Detalle Lateral:** Muestra metadatos del elemento seleccionado (tamaño, tipo, última modificación) y vista previa en texto.
+*   **Terminal Integrada:** Envía comandos rápidos al directorio activo, o levanta una terminal administrativa externa de Windows (PowerShell/CMD con bypass UAC) directamente en la ruta actual.
+
+### 🌐 Prototipo Web (`prototype_web/`)
+*   **Servidor Backend:** Construido sobre Node.js y Express para indexar y servir directorios locales vía API HTTP.
+*   **Frontend Modular:** Diseñado con HTML5, CSS y JavaScript Vanilla, simulando una interfaz fluida e intuitiva tipo Dashboard.
+
+---
+
+## 📂 Contenido y Estructura del Repositorio
+
+El repositorio se encuentra estructurado de la siguiente forma:
 
 ```text
 AureonVault/
-|-- app.py
-|-- run_aureonvault.bat
-|-- README.md
-`-- prototype_web/
-    |-- package.json
-    |-- package-lock.json
+|-- [app.py](file:///C:/Users/pablo/Documentos/GitHub/AureonVault/app.py)                   # Código fuente principal en Python/Tkinter
+|-- [run_aureonvault.bat](file:///C:/Users/pablo/Documentos/GitHub/AureonVault/run_aureonvault.bat)       # Ejecutable bat para entorno Windows
+|-- [README.md](file:///C:/Users/pablo/Documentos/GitHub/AureonVault/README.md)                 # Documentación del proyecto (este archivo)
+|-- [assets/](file:///C:/Users/pablo/Documentos/GitHub/AureonVault/assets/)                   # Recursos visuales (hero banner animado)
+`-- [prototype_web/](file:///C:/Users/pablo/Documentos/GitHub/AureonVault/prototype_web/)            # Código del prototipo de servidor Express
     |-- server.js
     `-- src/
         |-- index.html
@@ -64,79 +83,41 @@ AureonVault/
         `-- styles.css
 ```
 
-## Archivo por archivo
+---
 
-- `app.py`
-  Aplicacion principal. Construye la UI, gestiona la navegacion, el filtro, la vista de detalle, la consola integrada y las acciones de abrir o revelar archivos.
-- `run_aureonvault.bat`
-  Lanzador rapido para Windows. Intenta abrir la app con `pythonw` y hace fallback a `python`.
-- `prototype_web/server.js`
-  Servidor Express del prototipo web local.
-- `prototype_web/src/`
-  HTML, logica cliente y estilos del MVP anterior.
+## 🚀 Guía de Ejecución
 
-## Como ejecutar la app principal
+### Requisitos Base
+*   Sistema Operativo Windows 10 o 11.
+*   Python 3.10 o superior instalado.
+*   Node.js 18 o superior (solo si deseas ejecutar el prototipo web).
 
-Requisitos recomendados:
+### Ejecutar la Aplicación de Escritorio (Python)
+Puedes arrancar la interfaz nativa ejecutando directamente el script o usando el launcher portable:
 
-- Windows
-- Python 3.10 o superior
+1.  **Vía Terminal:**
+    ```powershell
+    # Ingresar a la ruta del proyecto
+    cd C:\Users\pablo\Documentos\GitHub\AureonVault
+    # Iniciar la aplicación
+    python app.py
+    ```
+2.  **Vía Launcher:**
+    Haz doble clic en `run_aureonvault.bat` para iniciar en modo silencioso (`pythonw`).
 
-Ejecucion directa:
+### Ejecutar el Prototipo Web (Express)
+1.  Ingresa a la subcarpeta e instala las dependencias de Node:
+    ```powershell
+    cd C:\Users\pablo\Documentos\GitHub\AureonVault\prototype_web
+    npm install
+    ```
+2.  Inicia el servidor local:
+    ```powershell
+    npm start
+    ```
+3.  Abre en tu navegador la dirección: [http://localhost:3000](http://localhost:3000)
 
-```powershell
-cd C:\Users\Jack\Documents\GitHub\Experimentos\AureonVault
-python app.py
-```
+---
 
-Tambien puedes abrir:
-
-```text
-run_aureonvault.bat
-```
-
-## Como ejecutar el prototipo web
-
-Requisitos:
-
-- Node.js 18 o superior recomendado
-
-Instalacion:
-
-```powershell
-cd C:\Users\Jack\Documents\GitHub\Experimentos\AureonVault\prototype_web
-npm install
-```
-
-Ejecucion:
-
-```powershell
-npm start
-```
-
-## Estado actual
-
-Este proyecto esta en fase experimental. La implementacion de escritorio ya concentra la idea principal, mientras que `prototype_web/` queda en el repo como registro del prototipo previo.
-
-No esta pensado todavia como administrador de archivos de uso empresarial ni como sustituto completo del Explorador de Windows. Es un laboratorio de interfaz, flujo y herramientas locales.
-
-## Seguridad y alcance
-
-- No intenta subir archivos a la nube ni conectarse a servicios externos.
-- Trabaja con rutas locales del equipo.
-- El repositorio ignora dependencias locales como `node_modules`, caches de Python y archivos de entorno.
-
-## Casos de uso razonables
-
-- experimentar con una UI de gestion de archivos distinta a la nativa
-- revisar rapidamente contenido de carpetas comunes
-- abrir o revelar archivos desde una interfaz personalizada
-- usar el repo como base para futuros experimentos de file manager en Windows
-
-## Posibles siguientes pasos
-
-- operaciones de copiar, mover y renombrar desde la interfaz
-- pestañas o paneles dobles
-- favoritos editables por el usuario
-- miniaturas mas ricas para imagenes y documentos
-- empaquetado como ejecutable para Windows
+## 🛡️ Seguridad y Privacidad
+AureonVault trabaja de forma estrictamente local. Ninguno de los archivos o directorios leídos del sistema se suben a servidores externos ni se comparten con servicios de red. El servidor Express corre exclusivamente en tu interfaz loopback (`127.0.0.1`).
