@@ -4,7 +4,7 @@
   <img src="assets/hero.svg" alt="AureonVault Hero Banner" width="800">
 </p>
 
-**AureonVault** es un explorador de archivos experimental diseñado para el entorno de Windows, que cuenta con una interfaz de escritorio nativa en Python/Tkinter y conserva un prototipo de interfaz web local dentro del mismo repositorio.
+**AureonVault** es un explorador de files experimental diseñado para el entorno de Windows, que cuenta con una interfaz de escritorio nativa en Python/Tkinter y conserva un prototipo de interfaz web local dentro del mismo repositorio.
 
 El objetivo del proyecto no es reemplazar el Explorador de Windows nativo, sino experimentar con una dirección visual fuertemente estilizada (tonos oscuros, morados y dorados), controles simplificados de navegación, filtros de búsqueda instantáneos y herramientas integradas para terminales del sistema.
 
@@ -14,7 +14,7 @@ El objetivo del proyecto no es reemplazar el Explorador de Windows nativo, sino 
 
 AureonVault integra dos aproximaciones del mismo problema: una aplicación de escritorio de alto rendimiento basada en Python y un prototipo web desacoplado basado en Node.js y Express.
 
-El siguiente diagrama detalla cómo se organizan y comunican ambos entornos con el sistema de archivos de Windows:
+El siguiente diagrama detalla cómo se organizan y comunican ambos entornos con el sistema de files de Windows:
 
 ```mermaid
 graph TD
@@ -55,9 +55,9 @@ graph TD
 *   **Detección Automática de Discos:** Escaneo dinámico y listado de unidades del sistema (C:, D:, etc.) al iniciar.
 *   **Barra Lateral de Accesos Rápidos:** Enlaces directos a directorios frecuentes (`Escritorio`, `Documentos`, `Descargas`, `Imágenes`).
 *   **Navegación Breadcrumbs:** Barra de migas de pan interactiva que permite subir de nivel jerárquico fácilmente.
-*   **Filtro Dinámico:** Búsqueda y filtrado en tiempo real de archivos y carpetas mediante una barra de búsqueda rápida.
+*   **Filtro Dinámico:** Búsqueda y filtrado en tiempo real de files y folders mediante una barra de búsqueda rápida.
 *   **Panel de Detalle Lateral:** Muestra metadatos del elemento seleccionado (tamaño, tipo, última modificación) y vista previa en texto.
-*   **Terminal Integrada:** Envía comandos rápidos al directorio activo, o levanta una terminal administrativa externa de Windows (PowerShell/CMD con bypass UAC) directamente en la ruta actual.
+*   **Terminal Integrada:** Envía commands rápidos al directorio activo, o levanta una terminal administrativa externa de Windows (PowerShell/CMD con bypass UAC) directamente en la ruta actual.
 
 ### 🌐 Prototipo Web (`prototype_web/`)
 *   **Servidor Backend:** Construido sobre Node.js y Express para indexar y servir directorios locales vía API HTTP.
@@ -120,6 +120,6 @@ Puedes arrancar la interfaz nativa ejecutando directamente el script o usando el
 ---
 
 ## 🛡️ Seguridad y Privacidad
-AureonVault trabaja de forma estrictamente local. Ninguno de los archivos o directorios leídos del sistema se suben a servidores externos ni se comparten con servicios de red. El servidor Express corre exclusivamente en tu interfaz loopback (`127.0.0.1`).
+AureonVault trabaja de forma estrictamente local. Ninguno de los files o directorios leídos del sistema se suben a servidores externos ni se comparten con servicios de red. El servidor Express corre exclusivamente en tu interfaz loopback (`127.0.0.1`).
 
 <!-- Updated for 2026 active baseline maintenance -->
