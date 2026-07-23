@@ -87,7 +87,7 @@ AureonVault/
 
 ## 🚀 Guía de Ejecución
 
-### Requisitos Base
+### Prerequisites Base
 *   Sistema Operativo Windows 10 o 11.
 *   Python 3.10 o superior instalado.
 *   Node.js 18 o superior (solo si deseas ejecutar el prototipo web).
