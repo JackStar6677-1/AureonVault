@@ -121,3 +121,5 @@ Puedes arrancar la interfaz nativa ejecutando directamente el script o usando el
 
 ## 🛡️ Seguridad y Privacidad
 AureonVault trabaja de forma estrictamente local. Ninguno de los archivos o directorios leídos del sistema se suben a servidores externos ni se comparten con servicios de red. El servidor Express corre exclusivamente en tu interfaz loopback (`127.0.0.1`).
+
+<!-- Updated for 2026 active baseline maintenance -->
